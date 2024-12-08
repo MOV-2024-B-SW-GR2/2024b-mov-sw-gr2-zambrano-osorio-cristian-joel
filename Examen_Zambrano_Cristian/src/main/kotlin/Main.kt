@@ -1,7 +1,9 @@
 package ec.edu.epn.jdbc
 
 import ec.edu.epn.jdbc.Controlador.Controlador
+import ec.edu.epn.jdbc.Modelo.AsientoDeCine
 import ec.edu.epn.jdbc.Modelo.SalaDeCine
+import java.util.Date
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -29,7 +31,23 @@ fun main() {
                 print("Tarifa por asiento: ")
                 val tarifa = readln().toDoubleOrNull() ?: 0.0
 
-                val sala = SalaDeCine(nombre, numeroDeAsientos, habilitada, apertura, tarifa)
+                val asientos = mutableListOf<AsientoDeCine>()
+                println("\n--- Configuración de Asientos ---")
+                for (i in 1..numeroDeAsientos) {
+                    println("Configurando asiento #$i:")
+                    print("¿Está ocupado? (true/false): ")
+                    val ocupado = readln().toBoolean()
+
+                    print("Tipo de asiento (ej: VIP, Estándar): ")
+                    val tipo = readln()
+
+                    val precio = if (tipo.lowercase() == "vip") tarifa * 1.5 else tarifa
+                    println("Precio asignado: $$precio")
+
+                    val asiento = AsientoDeCine(numero = i, ocupado = ocupado, tipo = tipo, precio = precio, fechaReservacion = Date().toString())
+                    asientos.add(asiento)
+                }
+                val sala = SalaDeCine(nombre, numeroDeAsientos, habilitada, apertura, tarifa, asientos)
                 Controlador.agregarSala(sala)
                 println("Sala agregada correctamente.")
             }
@@ -65,7 +83,7 @@ fun main() {
 
                     val salaActualizada = SalaDeCine(
                         nuevoNombre, nuevoNumeroDeAsientos, nuevaHabilitada,
-                        nuevaApertura, nuevaTarifa
+                        nuevaApertura, nuevaTarifa, sala.asientos
                     )
                     if (Controlador.actualizarSala(nombre, salaActualizada)) {
                         println("Sala actualizada correctamente.")

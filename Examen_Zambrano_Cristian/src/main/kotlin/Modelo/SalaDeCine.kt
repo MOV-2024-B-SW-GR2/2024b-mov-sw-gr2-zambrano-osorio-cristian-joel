@@ -8,6 +8,7 @@ data class SalaDeCine(
     var habilitada: Boolean,          // ¿Está habilitada para uso?
     var apertura: String,             // Horario de apertura
     var tarifaPorAsiento: Double,     // Tarifa estándar por asiento
+    var asientos: MutableList<AsientoDeCine> = mutableListOf() // Lista de asientos
 ) : Serializable  {
     override fun toString(): String {
         return """
@@ -17,6 +18,7 @@ data class SalaDeCine(
             - Habilitada: ${if (habilitada) "Sí" else "No"}
             - Horario de apertura: $apertura
             - Tarifa por asiento: $tarifaPorAsiento
+            - Asientos: $asientos
           """
     }
 }
