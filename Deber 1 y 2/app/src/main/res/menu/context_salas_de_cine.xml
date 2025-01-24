@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/context_ver_asientos"
+        android:icon="@android:drawable/ic_menu_day"
+        android:title="Ver asientos" />
+    <item
+        android:id="@+id/context_editar_sala_de_cine"
+        android:title="Editar sala de cine" />
+    <item
+        android:id="@+id/context_eliminar_sala_de_cine"
+        android:title="Eliminar sala de cine" />
+</menu>
